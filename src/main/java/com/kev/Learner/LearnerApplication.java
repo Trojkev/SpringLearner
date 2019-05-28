@@ -14,8 +14,8 @@ import java.io.IOException;
 @SpringBootApplication
 public class LearnerApplication {
 
-@Autowired
-BuildIsoMessage buildIsoMessage;
+	@Autowired
+	BuildIsoMessage buildIsoMessage;
 	public static void main(String[] args) {
 		SpringApplication.run(LearnerApplication.class, args);
 	}

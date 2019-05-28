@@ -21,6 +21,11 @@ public class BuildIsoMessage {
         this.msgRepo = msgRepo;
     }
 
+    /*
+    * This method compiles/prepares the ISO message to be sent to the switch server
+    * for processing.
+    * The database record creator and message sender will be called from within this method too.
+    * */
     public void createMessage() throws ISOException, IOException{
         // Build packager based on the xml file that contain the DE type
         GenericPackager packager = new GenericPackager("basic.xml");
@@ -102,13 +107,11 @@ public class BuildIsoMessage {
      * when we get the response
      * */
     private void sendISOMsg(ISOMsg message, long id) throws ISOException, IOException {
-        System.out.println("============Sending ISO Message==================");
         ISOPackager packager = new XMLPackager();
         ISOChannel channel = new XMLChannel("localhost", 8000, packager);
         channel.connect();
         channel.send(message);
         ISOMsg response = channel.receive();
-//        System.out.println(response);
         response.dump(System.out, "");
 
         // update the db record to capture this response
